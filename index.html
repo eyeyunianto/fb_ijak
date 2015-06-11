@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Facebook JavaScript & OAuth 2.0 html5 Demo</title>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <img src="loading.gif" style="position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;">
+        <script type="text/javascript">
+            var button;
+            var userInfo;
+
+            window.fbAsyncInit = function(){
+                FB.init({ appId: '1389978131265139',
+                    status: true,
+                    cookie: true,
+                    xfbml: true,
+                    oauth: true});
+
+                function updateButton(response) {
+                    button = document.getElementById('fb-auth');
+                    userInfo = document.getElementById('user-info');
+
+                    if (response.status === 'connected') {
+                        FB.api('/me', function(info) {
+                            login(response, info);
+                            getAccessToken();
+                        });
+
+                        // button.onclick = function() {
+                        //     FB.logout(function(response) {
+                        //         logout(response);
+                        //     });
+                        // };
+                    } else {
+                        button.innerHTML = 'Login';
+                        button.onclick = function() {
+                            FB.login(function(response) {
+                                if (response.status === 'connected') {
+                                    FB.api('/me', function(info) {
+                                        login(response, info);
+                                    });
+                                } else {
+                                    logout(response);
+                                }
+                            }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me'});
+                        }
+                    }
+                }
+
+                //function onAuthLogin(response){
+                //    FB.ui({
+                //        client_id: '211488312251165',
+                //        method: 'oauth',
+                //        scope: 'email,user_birthday,status_update,publish_stream,user_about_me',
+                //        redirect_uri: 'http://facebook-javascript-api.appspot.com/html5.html',
+                //        response_type: 'token'
+                //    });
+                //}
+
+
+                // run once with current status and whenever the status changes
+                FB.getLoginStatus(updateButton);
+                //FB.Event.subscribe('auth.login', onAuthLogin);
+                FB.Event.subscribe('auth.statusChange', updateButton);
+            };
+            (function() {
+                var e = document.createElement('script');
+                e.type = 'text/javascript';
+                e.async = true;
+                e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+
+
+            function login(response, info){
+                if (response.authResponse) {
+                    // var accessToken = response.authResponse.accessToken;
+                    // userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
+                    // button.innerHTML = 'Logout';
+                    // document.getElementById('other').style.display = "block";
+                }
+            }
+
+            function logout(response){
+                userInfo.innerHTML = "";
+                document.getElementById('debug').innerHTML = "";
+                document.getElementById('other').style.display = "none";
+            }
+
+            function feed(){
+                var publish = {
+                    method: 'feed',
+                    message: 'getting educated about Facebook Connect',
+                    name: 'Connect',
+                    caption: 'The Facebook Connect JavaScript SDK',
+                    description: (
+                        'A small JavaScript library that allows you to harness ' +
+                        'the power of Facebook, bringing the user\'s identity, ' +
+                        'social graph and distribution power to your site.'
+                    ),
+                    link: 'http://facebook-javascript-api.appspot.com/',
+                    picture: 'http://facebook-javascript-api.appspot.com/static/jobs.jpg',
+                    actions: [
+                        { name: 'facebook-javascript-api', link: 'http://facebook-javascript-api.appspot.com/' }
+                    ],
+                    user_message_prompt: 'Share your thoughts about facebook api'
+                };
+                
+                FB.ui(publish, function(response){alert("feed callback.");});
+            
+            }
+
+            function apprequest() {
+                FB.ui({
+                    method: 'apprequests',
+                    message: 'You should learn more about Facebook JavaScript & OAuth 2.0.'
+                    }, 
+                    function(response){
+                        alert('send-to-many callback');
+                    }
+                );
+            }
+
+            function clearRequests() {
+                FB.api('/me/apprequests', function(response) {
+                    var ids = [];
+                    for (var i=0, l=response.data.length; i<l; i++) {
+                        FB.api('/' + response.data[i].id, 
+                            'DELETE', 
+                            function(response){
+                                alert('clear requests');
+                            }
+                        );
+                    }
+                });
+            }
+            
+            function clearPrompted() {
+                FB.api(
+                    prompt('Enter the ID of the request to delete:'),
+                    'DELETE',
+                    function(response){
+                        alert('delete request');
+                    }
+                );
+            }
+
+
+            function streamPublish(name, description, hrefTitle, hrefLink, userPrompt){
+                FB.api('/me', function(response) {
+                    console.log(response.id);
+                    FB.ui(
+                    {
+                        method: 'stream.publish',
+                        message: 'getting educated about Facebook Connect',
+                        attachment: {
+                            name: response.name,
+                            caption: 'The Facebook Connect JavaScript SDK',
+                            description: ('I like the articles.'),
+                            href: 'http://facebook-javascript-api.appspot.com/html5.html'
+                        },
+                        action_links: [
+                            { text: 'Like it!', href: 'http://facebook-javascript-api.appspot.com/html5.html'}
+                        ],
+                        user_prompt_message: 'Share your thoughts about facebook api'
+                    },
+                    function(response) {
+                        alert(response);
+                    });
+                });
+
+            }
+
+            function share(){
+                var share = {
+                    method: 'stream.share',
+                    u: 'http://facebook-javascript-api.appspot.com/'
+                };
+
+                FB.ui(share, function(response) {
+                    console.log(response);
+                });
+            }
+
+            function graphStreamPublish(){
+                FB.api('/me/feed', 'post',
+                {
+                    message     : "Facebook JavaScript & OAuth 2.0 Demo",
+                    link        : 'http://facebook-javascript-api.appspot.com',
+                    picture     : 'http://facebook-javascript-api.appspot.com/static/jobs.jpg',
+                    name        : 'JavaScript & OAuth 2.0',
+                    description : 'View Facebook API Demo from http://facebook-javascript-api.appspot.com.'
+                },
+                function(response) {
+                    if (!response || response.error) {
+                        alert('Error occured');
+                    } else {
+                        alert('Post ID: ' + response.id);
+                    }
+                });
+            }
+
+            function fqlQuery(){
+                FB.api('/me', function(response) {
+                    var query = FB.Data.query('select name, profile_url, sex, pic_small from user where uid={0}', response.id);
+                    query.wait(function(rows) {
+                       document.getElementById('debug').innerHTML =
+                         'FQL Information: '+  "<br />" +
+                         'Your name: '      +  rows[0].name                                                            + "<br />" +
+                         'Your Sex: '       +  (rows[0].sex!= undefined ? rows[0].sex : "")                            + "<br />" +
+                         'Your Profile: '   +  "<a href='" + rows[0].profile_url + "'>" + rows[0].profile_url + "</a>" + "<br />" +
+                         '<img src="'       +  rows[0].pic_small + '" alt="" />' + "<br />";
+                     });
+                });
+            }
+
+            function setStatus(){
+                status1 = document.getElementById('status').value;
+                FB.api(
+                {
+                    method: 'status.set',
+                    status: status1
+                },
+                function(response) {
+                    if (response == 0){
+                        alert('Your facebook status not updated. Give Status Update Permission.');
+                    }
+                    else{
+                        alert('Your facebook status updated');
+                    }
+                });
+            }
+            function getAccessToken() {
+              var token =FB.getAccessToken();
+              var fs = ign.filesystem();
+              var OSName="Unknown OS";
+                if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+                if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+                if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+                if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+                
+                
+                if(navigator.appVersion.indexOf("Win")!=-1){
+                    var link = fs.appPath().replace(/ /g,'%20');
+                    var callback='file:///'+link+'/www/index.html?'+token;
+                    // var callback='file:///'+link+'/www/index.html#/fb?'+token;
+                    console.log(callback);
+                    ign.setUrl(callback);
+                }else {
+                    var link = fs.appPath().replace('MacOS','Resources');
+                    var callback='file://'+link+'/www/index.html?'+token;
+                    // var callback='file:///'+link+'/www/index.html#/fb?'+token;
+                    console.log(token);
+                    console.log(link);
+                    console.log(callback);
+                    console.log(fs.appPath());
+                    ign.setUrl(callback);
+                }
+                //var callback='file://'+link+'/www/index.html?'+token;
+                //var callback=link[0]+'/Resources/wwww/index.html#'+token;
+                //console.log(callback);
+                          //alert(data);
+                          //alert(callback);
+                  //ign.cbOauth(callback);
+                  //var url = 'index.html#'+token;
+                //ign.setUrl(callback);
+            }
+
+        </script>
+    </body>
+</html>
