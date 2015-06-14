@@ -245,13 +245,13 @@
                 if(navigator.appVersion.indexOf("Win")!=-1){
                     var link = fs.appPath().replace(/ /g,'%20');
                     // var callback='file:///'+link+'/www/index.html?'+token;
-                    var callback='file:///'+link+'/www/index.html#/fb?'+token;
+                    var callback='file:///'+link+'/www/index.html#/fb/'+token;
                     console.log(callback);
                     ign.setUrl(callback);
                 }else {
                     var link = fs.appPath().replace('MacOS','Resources');
                     // var callback='file://'+link+'/www/index.html?'+token;
-                    var callback='file:///'+link+'/www/index.html#/fb?'+token;
+                    var callback='file:///'+link+'/www/index.html#/fb/'+token;
                     console.log(token);
                     console.log(link);
                     console.log(callback);
