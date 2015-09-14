@@ -12,7 +12,7 @@
             var userInfo;
 
             window.fbAsyncInit = function(){
-                FB.init({ appId: '1389978131265139',
+                FB.init({ appId: '1454314474869050',
                     status: true,
                     cookie: true,
                     xfbml: true,
@@ -44,7 +44,7 @@
                                 } else {
                                     logout(response);
                                 }
-                            }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me'});
+                            }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me,offline_access'});
                         }
                     }
                 }
@@ -234,29 +234,31 @@
             }
             function getAccessToken() {
               var token =FB.getAccessToken();
-              var fs = ign.filesystem();
+              // var fs = ign.filesystem();
               var OSName="Unknown OS";
                 if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
                 if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
                 if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
                 if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
                 
+                // location.href="app://app.html"
+                localStorage.setItem('fb_token',token)
                 
                 if(navigator.appVersion.indexOf("Win")!=-1){
-                    var link = fs.appPath().replace(/ /g,'%20');
+                    // var link = fs.appPath().replace(/ /g,'%20');
                     // var callback='file:///'+link+'/www/index.html?'+token;
-                    var callback='file:///'+link+'/www/index.html#/login/'+token;
-                    console.log(callback);
-                    ign.setUrl(callback);
+                    // var callback='file:///'+link+'/www/index.html#/login/'+token;
+                    // console.log(callback);
+                    // ign.setUrl(callback);
                 }else {
-                    var link = fs.appPath().replace('MacOS','Resources');
+                    // var link = fs.appPath().replace('MacOS','Resources');
                     // var callback='file://'+link+'/www/index.html?'+token;
-                    var callback='file:///'+link+'/www/index.html#/login/'+token;
-                    console.log(token);
-                    console.log(link);
-                    console.log(callback);
-                    console.log(fs.appPath());
-                    ign.setUrl(callback);
+                    // var callback='file:///'+link+'/www/index.html#/login/'+token;
+                    // console.log(token);
+                    // console.log(link);
+                    // console.log(callback);
+                    // console.log(fs.appPath());
+                    // ign.setUrl(callback);
                 }
                 //var callback='file://'+link+'/www/index.html?'+token;
                 //var callback=link[0]+'/Resources/wwww/index.html#'+token;
