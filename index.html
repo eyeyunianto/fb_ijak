@@ -234,46 +234,15 @@
                 });
             }
             function getAccessToken() {
-              var token =FB.getAccessToken();
-              // var fs = ign.filesystem();
-              var OSName="Unknown OS";
-                if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
-                if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
-                if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
-                if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
-                
-                // location.href="app://app.htoktml"
+                var token =FB.getAccessToken();
                 console.log(token)
                 localStorage.setItem('fb_token',token)
                 try{
-                    parent.document.callback_oauth('facebook',token);
+                    top.document.callback_oauth('facebook',token);
                 }catch(e){
                     console.log(e.message)
                 }
-                if(navigator.appVersion.indexOf("Win")!=-1){
-                    // var link = fs.appPath().replace(/ /g,'%20');
-                    // var callback='file:///'+link+'/www/index.html?'+token;
-                    // var callback='file:///'+link+'/www/index.html#/login/'+token;
-                    // console.log(callback);
-                    // ign.setUrl(callback);
-                }else {
-                    // var link = fs.appPath().replace('MacOS','Resources');
-                    // var callback='file://'+link+'/www/index.html?'+token;
-                    // var callback='file:///'+link+'/www/index.html#/login/'+token;
-                    // console.log(token);
-                    // console.log(link);
-                    // console.log(callback);
-                    // console.log(fs.appPath());
-                    // ign.setUrl(callback);
-                }
-                //var callback='file://'+link+'/www/index.html?'+token;
-                //var callback=link[0]+'/Resources/wwww/index.html#'+token;
-                //console.log(callback);
-                          //alert(data);
-                          //alert(callback);
-                  //ign.cbOauth(callback);
-                  //var url = 'index.html#'+token;
-                //ign.setUrl(callback);
+                
             }
 
         </script>
