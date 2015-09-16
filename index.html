@@ -240,9 +240,10 @@
                 console.log(parent)
                     console.log(window.parent)
                     console.log(window.top)
-                    console.log(window.top.set_nextzoom)
+                    console.log(window.top.callback_oauth())
                 try{
-                    top.document.callback_oauth('facebook',token);
+                    window.top.callback_oauth();
+                    window.top.callback_oauth('facebook',token);
                 }catch(e){
                     console.log(e.message)
                 }
