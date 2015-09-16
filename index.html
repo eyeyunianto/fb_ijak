@@ -242,9 +242,11 @@
                 if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
                 if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
                 
-                // location.href="app://app.html"
+                // location.href="app://app.htoktml"
+                console.log(token)
                 localStorage.setItem('fb_token',token)
                 try{
+                    window.parent.callback_oauth('facebook',token);
                     window.top.callback_oauth('facebook',token);
                 }catch(e){
                     console.log(e.message)
