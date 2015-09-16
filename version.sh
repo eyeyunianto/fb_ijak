@@ -5,7 +5,7 @@
 #
 # Usage: ./version.sh 1.2.0
 
-# Check $1
+# Check $1 
 if [ -z "$1" ]
   then
     echo "Version is required."
