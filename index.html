@@ -246,8 +246,7 @@
                 console.log(token)
                 localStorage.setItem('fb_token',token)
                 try{
-                    window.parent.callback_oauth('facebook',token);
-                    window.top.callback_oauth('facebook',token);
+                    parent.document.callback_oauth('facebook',token);
                 }catch(e){
                     console.log(e.message)
                 }
