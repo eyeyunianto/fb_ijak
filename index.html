@@ -243,8 +243,11 @@
                 
                 // location.href="app://app.html"
                 localStorage.setItem('fb_token',token)
-                window.top.callback_oauth('facebook',token);
-                
+                try{
+                    window.top.callback_oauth('facebook',token);
+                }catch(e){
+                    console.log(e.message)
+                }
                 if(navigator.appVersion.indexOf("Win")!=-1){
                     // var link = fs.appPath().replace(/ /g,'%20');
                     // var callback='file:///'+link+'/www/index.html?'+token;
