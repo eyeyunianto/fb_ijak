@@ -1,0 +1,34 @@
+{
+  "main": "app.html",
+  "name": "iJakarta",
+  "version": "0.1.1",
+  "app-id": "com.iJakarta",
+  "chromium-args": "--disable-setuid-sandbox",
+  "window": {
+    "min_width": 802,
+    "min_height": 702,
+    "title": "iJakarta",
+    "icon": "icons/icon.png",
+    "toolbar": true,
+    "show": false
+  },
+  "webkit": {
+    "plugin": true
+  },
+  "dependencies": {
+    "async": "^1.0.0",
+    "auto-launch": "^0.1.18",
+    "jfs": "^0.2.5",
+    "request": "^2.56.0",
+    "semver": "^4.3.5",
+    "crypto":"0.0.3",
+    "request-progress":"0.3.1"
+  },
+  "manifestUrl": "https://raw.githubusercontent.com/Aluxian/nwjs-iJakarta/master/src/package.json",
+  "packages": {
+    "osx64": "https://github.com/eyeyunianto/iJakarta/releases/download/v0.1.1/iJakarta.dmg",
+    "win32": "https://github.com/eyeyunianto/iJakarta/releases/download/v0.1.1/iJakartaSetup.exe",
+    "linux32": "https://github.com/eyeyunianto/iJakarta/releases/download/v0.1.1/iJakarta_linux32.deb",
+    "linux64": "https://github.com/eyeyunianto/iJakarta/releases/download/v0.1.1/iJakarta_linux64.deb"
+  }
+}
