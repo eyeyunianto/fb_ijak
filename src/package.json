@@ -9,7 +9,7 @@
     "min_height": 702,
     "title": "iJakarta",
     "icon": "icons/icon.png",
-    "toolbar": true,
+    "toolbar": false,
     "show": false
   },
   "webkit": {
