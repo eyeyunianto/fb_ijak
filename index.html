@@ -37,7 +37,7 @@
                     userInfo = document.getElementById('user-info');
 
                     if (response.status === 'connected') {
-                        FB.api('/me', function(info) {
+                        FB.api('/me?fields=email,name,picture,id', function(info) {
                             login(response, info);
                             getAccessToken();
                         });
