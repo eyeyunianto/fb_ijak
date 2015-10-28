@@ -38,6 +38,8 @@
 
                     if (response.status === 'connected') {
                         FB.api('/me?fields=email,name,picture,id', function(info) {
+                            alert(response);
+                            alert(info);
                             login(response, info);
                             getAccessToken();
                         });
