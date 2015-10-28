@@ -247,11 +247,12 @@
             }
             function getAccessToken() {
                 var token =FB.getAccessToken();
-                FB.api('/me?fields=email,name,picture,id', function(info) {
-                    login(response, info);
+                FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+                  function(response) {
+                    console.log(response.email);
                     localStorage.setItem('fb_response',response)
-                    localStorage.setItem('fb_info',info)
-                });
+                  }
+                );
                 console.log(token)
                 localStorage.setItem('fb_token',token)
                 console.log(parent)
