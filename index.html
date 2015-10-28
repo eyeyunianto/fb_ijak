@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>Facebook JavaScript & OAuth 2.0 html5 Demo</title>
+        <title>iJakarta Facebook Connect</title>
         <script src="jquery.min.js"></script>
     </head>
     <body>
@@ -18,47 +18,53 @@
                     cookie: true,
                     xfbml: true,
                     oauth: true});
-                // FB.getLoginStatus(function(response) {
-                //     if (response.status == 'connected') {
-                //         getCurrentUserInfo(response)
-                //     } else {
-                //         FB.login(function(response) {
-                //             if (response.authResponse){
-                //                 getCurrentUserInfo(response)
-                //             } else {
-                //                 console.log('Auth cancelled.')
-                //             }
-                //         }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me,offline_access' });
-                //     }
-                // });
-
-                function updateButton(response) {
-                    button = document.getElementById('fb-auth');
-                    userInfo = document.getElementById('user-info');
-
-                    if (response.status === 'connected') {
-                        FB.api('/me?fields=email,name,picture,id', function(info) {
-                            login(response, info);
-                            // getAccessToken();
-                        });
+                FB.getLoginStatus(function(response) {
+                    if (response.status == 'connected') {
+                        // getCurrentUserInfo(response)
+                        alert(response)
                     } else {
-                        button.innerHTML = 'Login';
-                        button.onclick = function() {
-                            FB.login(function(response) {
-                                if (response.status === 'connected') {
-                                    FB.api('/me', function(info) {
-                                        login(response, info);
-                                    });
-                                } else {
-                                    logout(response);
-                                }
-                            }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me,offline_access'});
-                        }
+                        FB.login(function(response) {
+                            if (response.authResponse){
+                                // getCurrentUserInfo(response)
+                                alert(response)
+                                // FB.api('/me?fields=email,name,picture,id', function(info) {
+                                //     login(response, info);
+                                //     getAccessToken();
+                                // });
+                            } else {
+                                console.log('Auth cancelled.')
+                            }
+                        }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me,offline_access' });
                     }
-                }
+                });
 
-                FB.getLoginStatus(updateButton);
-                FB.Event.subscribe('auth.statusChange', updateButton);
+                // function updateButton(response) {
+                //     button = document.getElementById('fb-auth');
+                //     userInfo = document.getElementById('user-info');
+
+                //     if (response.status === 'connected') {
+                //         FB.api('/me?fields=email,name,picture,id', function(info) {
+                //             login(response, info);
+                //             getAccessToken();
+                //         });
+                //     } else {
+                //         button.innerHTML = 'Login';
+                //         button.onclick = function() {
+                //             FB.login(function(response) {
+                //                 if (response.status === 'connected') {
+                //                     FB.api('/me', function(info) {
+                //                         login(response, info);
+                //                     });
+                //                 } else {
+                //                     logout(response);
+                //                 }
+                //             }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me,offline_access'});
+                //         }
+                //     }
+                // }
+
+                // FB.getLoginStatus(updateButton);
+                // FB.Event.subscribe('auth.statusChange', updateButton);
             };
             (function() {
                 var e = document.createElement('script');
