@@ -18,6 +18,19 @@
                     cookie: true,
                     xfbml: true,
                     oauth: true});
+                FB.getLoginStatus(function(response) {
+                    if (response.status == 'connected') {
+                        getCurrentUserInfo(response)
+                    } else {
+                        FB.login(function(response) {
+                            if (response.authResponse){
+                                getCurrentUserInfo(response)
+                            } else {
+                                console.log('Auth cancelled.')
+                            }
+                        }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me,offline_access' });
+                    }
+                });
 
                 function updateButton(response) {
                     button = document.getElementById('fb-auth');
