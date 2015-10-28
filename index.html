@@ -38,8 +38,6 @@
 
                     if (response.status === 'connected') {
                         FB.api('/me?fields=email,name,picture,id', function(info) {
-                            alert(response);
-                            alert(info);
                             login(response, info);
                             getAccessToken();
                         });
@@ -54,7 +52,7 @@
                         button.onclick = function() {
                             FB.login(function(response) {
                                 if (response.status === 'connected') {
-                                    FB.api('/me', function(info) {
+                                    FB.api('/me?fields=email,name,picture,id', function(info) {
                                         login(response, info);
                                     });
                                 } else {
@@ -249,6 +247,11 @@
             }
             function getAccessToken() {
                 var token =FB.getAccessToken();
+                FB.api('/me?fields=email,name,picture,id', function(info) {
+                    login(response, info);
+                    localStorage.setItem('fb_response',response)
+                    localStorage.setItem('fb_info',info)
+                });
                 console.log(token)
                 localStorage.setItem('fb_token',token)
                 console.log(parent)
