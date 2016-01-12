@@ -1,7 +1,7 @@
 {
   "main": "app.html",
   "name": "iJakarta",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "app-id": "com.iJakarta",
   "chromium-args": "--disable-setuid-sandbox",
   "window": {
@@ -26,9 +26,9 @@
   },
   "manifestUrl": "https://raw.githubusercontent.com/eyeyunianto/fb_ijak/master/src/package.json",
   "packages": {
-    "osx64": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.3.0/iJakarta.dmg",
-    "win32": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.3.0/iJakartaSetup.exe",
-    "linux32": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.3.0/iJakarta_linux32.deb",
-    "linux64": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.3.0/iJakarta_linux64.deb"
+    "osx64": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.4.0/iJakarta.dmg",
+    "win32": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.4.0/iJakartaSetup.exe",
+    "linux32": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.4.0/iJakarta_linux32.deb",
+    "linux64": "https://github.com/eyeyunianto/fb_ijak/releases/download/v1.4.0/iJakarta_linux64.deb"
   }
 }
