@@ -1,7 +1,7 @@
 {
   "main": "app.html",
   "name": "iJakarta",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "app-id": "com.iJakarta",
   "chromium-args": "--disable-setuid-sandbox",
   "window": {
