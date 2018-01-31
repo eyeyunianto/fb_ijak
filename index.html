@@ -9,109 +9,109 @@
         <div id="fb-root"></div>
         <img src="loading.gif" style="position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;">
         <script type="text/javascript">
-            var button;
-            var userInfo;
+            // var button;
+            // var userInfo;
 
-            window.fbAsyncInit = function(){
-                FB.init({ appId: '1454314474869050',
-                    status: true,
-                    cookie: true,
-                    xfbml: true,
-                    oauth: true});
-                FB.getLoginStatus(function(response) {
-                    if (response.status == 'connected') {
-                        // getCurrentUserInfo(response)
-                        alert(response)
-                    } else {
-                        FB.login(function(response) {
-                            if (response.authResponse){
-                                // getCurrentUserInfo(response)
-                                alert(response)
-                                // FB.api('/me?fields=email,name,picture,id', function(info) {
-                                //     login(response, info);
-                                //     getAccessToken();
-                                // });
-                            } else {
-                                console.log('Auth cancelled.')
-                            }
-                        }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me,offline_access' });
-                    }
-                });
+            // window.fbAsyncInit = function(){
+            //     FB.init({ appId: '1454314474869050',
+            //         status: true,
+            //         cookie: true,
+            //         xfbml: true,
+            //         oauth: true});
+            //     FB.getLoginStatus(function(response) {
+            //         if (response.status == 'connected') {
+            //             // getCurrentUserInfo(response)
+            //             alert(response)
+            //         } else {
+            //             FB.login(function(response) {
+            //                 if (response.authResponse){
+            //                     // getCurrentUserInfo(response)
+            //                     alert(response)
+            //                     // FB.api('/me?fields=email,name,picture,id', function(info) {
+            //                     //     login(response, info);
+            //                     //     getAccessToken();
+            //                     // });
+            //                 } else {
+            //                     console.log('Auth cancelled.')
+            //                 }
+            //             }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me,offline_access' });
+            //         }
+            //     });
 
-                // function updateButton(response) {
-                //     button = document.getElementById('fb-auth');
-                //     userInfo = document.getElementById('user-info');
+            //     // function updateButton(response) {
+            //     //     button = document.getElementById('fb-auth');
+            //     //     userInfo = document.getElementById('user-info');
 
-                //     if (response.status === 'connected') {
-                //         FB.api('/me?fields=email,name,picture,id', function(info) {
-                //             login(response, info);
-                //             getAccessToken();
-                //         });
-                //     } else {
-                //         button.innerHTML = 'Login';
-                //         button.onclick = function() {
-                //             FB.login(function(response) {
-                //                 if (response.status === 'connected') {
-                //                     FB.api('/me', function(info) {
-                //                         login(response, info);
-                //                     });
-                //                 } else {
-                //                     logout(response);
-                //                 }
-                //             }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me,offline_access'});
-                //         }
-                //     }
-                // }
+            //     //     if (response.status === 'connected') {
+            //     //         FB.api('/me?fields=email,name,picture,id', function(info) {
+            //     //             login(response, info);
+            //     //             getAccessToken();
+            //     //         });
+            //     //     } else {
+            //     //         button.innerHTML = 'Login';
+            //     //         button.onclick = function() {
+            //     //             FB.login(function(response) {
+            //     //                 if (response.status === 'connected') {
+            //     //                     FB.api('/me', function(info) {
+            //     //                         login(response, info);
+            //     //                     });
+            //     //                 } else {
+            //     //                     logout(response);
+            //     //                 }
+            //     //             }, {scope:'email,user_birthday,status_update,publish_stream,user_about_me,offline_access'});
+            //     //         }
+            //     //     }
+            //     // }
 
-                // FB.getLoginStatus(updateButton);
-                // FB.Event.subscribe('auth.statusChange', updateButton);
-            };
-            (function() {
-                var e = document.createElement('script');
-                e.type = 'text/javascript';
-                e.async = true;
-                e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-                document.getElementById('fb-root').appendChild(e);
-            }());
+            //     // FB.getLoginStatus(updateButton);
+            //     // FB.Event.subscribe('auth.statusChange', updateButton);
+            // };
+            // (function() {
+            //     var e = document.createElement('script');
+            //     e.type = 'text/javascript';
+            //     e.async = true;
+            //     e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+            //     document.getElementById('fb-root').appendChild(e);
+            // }());
 
 
-            function login(response, info){
-                if (response.authResponse) {
-                    var accessToken = response.authResponse.accessToken;
-                    console.log(token)
-                    localStorage.setItem('fb_token',token)
-                    console.log(parent)
-                        console.log(window.parent)
-                        console.log(window.top)
-                        console.log(window.top.callback_oauth())
-                    try{
-                        window.top.callback_oauth();
-                        window.top.callback_oauth('facebook',token);
-                    }catch(e){
-                        console.log(e.message)
-                    }
-                    // userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
-                    // button.innerHTML = 'Logout';
-                    // document.getElementById('other').style.display = "block";
-                }
-            }
+            // function login(response, info){
+            //     if (response.authResponse) {
+            //         var accessToken = response.authResponse.accessToken;
+            //         console.log(token)
+            //         localStorage.setItem('fb_token',token)
+            //         console.log(parent)
+            //             console.log(window.parent)
+            //             console.log(window.top)
+            //             console.log(window.top.callback_oauth())
+            //         try{
+            //             window.top.callback_oauth();
+            //             window.top.callback_oauth('facebook',token);
+            //         }catch(e){
+            //             console.log(e.message)
+            //         }
+            //         // userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
+            //         // button.innerHTML = 'Logout';
+            //         // document.getElementById('other').style.display = "block";
+            //     }
+            // }
 
-            function getAccessToken() {
-                var token =FB.getAccessToken();
-                console.log(token)
-                localStorage.setItem('fb_token',token)
-                console.log(parent)
-                    console.log(window.parent)
-                    console.log(window.top)
-                    console.log(window.top.callback_oauth())
-                try{
-                    window.top.callback_oauth();
-                    window.top.callback_oauth('facebook',token);
-                }catch(e){
-                    console.log(e.message)
-                }
+            // function getAccessToken() {
+            //     var token =FB.getAccessToken();
+            //     console.log(token)
+            //     localStorage.setItem('fb_token',token)
+            //     console.log(parent)
+            //         console.log(window.parent)
+            //         console.log(window.top)
+            //         console.log(window.top.callback_oauth())
+            //     try{
+            //         window.top.callback_oauth();
+            //         window.top.callback_oauth('facebook',token);
+            //     }catch(e){
+            //         console.log(e.message)
+            //     }
 
-            }
+            // }
 
         </script>
     </body>
